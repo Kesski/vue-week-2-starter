@@ -181,15 +181,18 @@
                     this.errors.push('Select a medium')
                 }
 
-                if (!this.errors.length === 0) {
+                if (this.errors.length === 0) { // if there are no errors
                     let record = {
                     date: date,
                     hours: this.hours,
                     type: this.type,
-                    medium: this.medium
+                    medium: this.medium,
+                    completed: this.completed,
+                    notes: this.notes
                     }
                     this.activityRecords.push(record)
-
+                    this.notes = ''
+                    this.completed = false
                     // sort the activity records
                     this.activityRecords.sort(function(r1, r2) {
                         return r1.date.getTime() - r2.date.getTime() // sort with oldest records first, most recent at the end
@@ -202,7 +205,7 @@
             truncatedNote(fullNote) {
                 // takes a note as an argument and returns up to the first 40 characters
                 if (fullNote.length > 40) { // if longer than 40, truncate and add ... 
-                    return fullNote.subString(0,40) + "..."
+                    return fullNote.substring(0,40) + "..."
                 } else {
                     return fullNote // if less than 40, return original note
                 }
